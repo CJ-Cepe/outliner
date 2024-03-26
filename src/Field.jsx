@@ -58,15 +58,21 @@
     )
   }
   
-  function Button({outline}){
+  function Button({attribute, onChange}){
 
-    const handleOnClick = () => {
-        console.log(outline.color, outline.style, outline.thickness, outline.offset)
+    const handleOnClick = (event) => {
+        console.log(!attribute)
+        onChange(!attribute)
+        //add style
+        //remove style
     }
 
     return (
       <>
-        <button onClick={handleOnClick}> yeah!</button>
+        <div className="switch">
+            <input type="checkbox" value={attribute} onChange={handleOnClick}/>
+            <span className="slider"></span>
+        </div>
       </>
     )
   } 
@@ -90,7 +96,7 @@ function Field({labelName, componentType, data, onChange}){
         input = <OffsetPicker attribute={data["offset"]} onChange={onChange}/>
         break;
       case "button":  
-        input = <Button outline={data}/>
+        input = <Button attribute={data} onChange={onChange}/>
         break;
     }
   

@@ -10,8 +10,14 @@ function App() {
     offset: "0",
   });
 
+  const [slider, setSlider] = useState(false)
+
   const handleChange = (key, value) => {
     setOutline({...outline, [key]: value})
+  }
+
+  const handleSliderChange = (value) => {
+    setSlider(value)
   }
 
   return (
@@ -20,7 +26,7 @@ function App() {
       <Field labelName="style" componentType="style" data={outline} onChange={handleChange}/>
       <Field labelName="thickness" componentType="thickness" data={outline} onChange={handleChange}/>
       <Field labelName="offset" componentType="offset" data={outline} onChange={handleChange}/>
-      <Field labelName="button" componentType="button" data={outline} onChange={handleChange}/>
+      <Field labelName="button" componentType="button" data={slider} onChange={handleSliderChange}/>
     </main>
   )
 }
