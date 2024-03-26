@@ -1,34 +1,66 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+function Field({labelName, componentType}){
+  let input = null
+  switch(componentType){
+    case "offset":  
+      input = <OffsetPicker/>
+      break;
+    case "thickness": 
+      input = <ThicknessPicker />
+    case "color":  
+      input = <ColorPicker/>
+      break;
+    case "style":  
+      input = <StylePicker/>
+      break;
+    case "button":  
+      input = <Button/>
+      break;
+  }
+
+  return(
+    <div>
+      <label htmlFor="">
+        {input}
+        : {labelName}
+      </label>
+    </div>
+    )
+}
+
+function ThicknessPicker(){
+
+}
+
+function OffsetPicker(){
+
+}
+
+function ColorPicker(){
+
+}
+
+function StylePicker(){
+
+}
+
+function Button(){
+  
+} 
+
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <main>
+      <Field labelName="color" componentType="color" onChange=""/>
+      <Field labelName="style" componentType="style" onChange=""/>
+      <Field labelName="thickness" componentType="thickness" onChange=""/>
+      <Field labelName="offset" componentType="offset" onChange=""/>
+      <Field labelName="button" componentType="button" onChange=""/>
+    </main>
   )
 }
 
