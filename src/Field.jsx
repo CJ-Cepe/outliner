@@ -58,26 +58,7 @@
     )
   }
   
-  function Button({attribute, onChange}){
 
-    const handleOnClick = (event) => {
-        console.log(!attribute)
-        onChange(!attribute)
-        //add style
-        //remove style
-    }
-
-    return (
-      <>
-        <div className="switch">
-            <input type="checkbox" value={attribute} onChange={handleOnClick}/>
-            <span className="slider"></span>
-        </div>
-      </>
-    )
-  } 
-  
-  
 function Field({labelName, componentType, data, onChange}){
 
     let input = null
@@ -100,14 +81,14 @@ function Field({labelName, componentType, data, onChange}){
         break;
     }
   
-    return(
+    return (
       <div>
         <label>
           {input}
           : {labelName}
         </label>
       </div>
-      )
+    )
   }
   
 

@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Field from './Field';
+import Slider from './Slider';
 
 
 function App() {
+  
+  const [sliderState, setSliderState] = useState(false)
   const [outline, setOutline] = useState({
     color: "#ff0000",
     style: "solid",
@@ -10,24 +13,37 @@ function App() {
     offset: "0",
   });
 
-  const [slider, setSlider] = useState(false)
+  useEffect(()=>{
+    //retrieve from background if there is a file stored
+      //asign value
+    //sendMessage to content
+      //sliderState
+      //outline
+  }, [sliderState])
+
 
   const handleChange = (key, value) => {
     setOutline({...outline, [key]: value})
   }
 
   const handleSliderChange = (value) => {
-    setSlider(value)
+    setSliderState(value)
   }
 
   return (
-    <main>
-      <Field labelName="color" componentType="color" data={outline} onChange={handleChange}/>
-      <Field labelName="style" componentType="style" data={outline} onChange={handleChange}/>
-      <Field labelName="thickness" componentType="thickness" data={outline} onChange={handleChange}/>
-      <Field labelName="offset" componentType="offset" data={outline} onChange={handleChange}/>
-      <Field labelName="button" componentType="button" data={slider} onChange={handleSliderChange}/>
-    </main>
+    <>
+      <header>
+        OUTLINER
+      </header>
+
+      <main>
+        <Field labelName="color" componentType="color" data={outline} onChange={handleChange}/>
+        <Field labelName="style" componentType="style" data={outline} onChange={handleChange}/>
+        <Field labelName="thickness" componentType="thickness" data={outline} onChange={handleChange}/>
+        <Field labelName="offset" componentType="offset" data={outline} onChange={handleChange}/>
+        <Slider state={sliderState} onChange={handleSliderChange}/>
+      </main>
+    </>
   )
 }
 
