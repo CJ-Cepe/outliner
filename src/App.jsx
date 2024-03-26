@@ -3,7 +3,22 @@ import Field from './Field';
 import Slider from './Slider';
 
 
+
 function App() {
+  
+ /*  chrome.storage.local.get('stylesEnabled', (data) => {
+    checkbox.checked = data.stylesEnabled || false; // Set checkbox state based on storage
+
+    //inside EFFECT
+        chrome.storage.local.get('updatedColorList', (data) => {
+      if(data.updatedColorList){
+        defColorList = [...data.updatedColorList]
+        setColorList(defColorList)
+      }
+    })
+  }); */
+
+    
   
   const [sliderState, setSliderState] = useState(false)
   const [outline, setOutline] = useState({
@@ -19,6 +34,8 @@ function App() {
     //sendMessage to content
       //sliderState
       //outline
+    /* chrome.storage.local.set({ stylesEnabled }); */
+    //chrome.runtime.sendMessage({ action: 'toggleOutline', outline, sliderState });
   }, [sliderState])
 
 
@@ -35,7 +52,7 @@ function App() {
       <header>
         OUTLINER
       </header>
-
+      
       <main>
         <Field labelName="color" componentType="color" data={outline} onChange={handleChange}/>
         <Field labelName="style" componentType="style" data={outline} onChange={handleChange}/>
