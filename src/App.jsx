@@ -41,8 +41,8 @@ function App() {
   useEffect(()=>{
     const tempState = {outline, sliderState};
     chrome.storage.local.set({ data: tempState});
-
-    /* chrome.runtime.sendMessage({ action: 'toggleOutline', outline, sliderState }); */
+    //send message to background
+    chrome.runtime.sendMessage({ action: 'toggleSlider', outline, sliderState });
   }, [sliderState, outline])
 
   const handleChange = (key, value) => {

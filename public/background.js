@@ -1,26 +1,22 @@
+console.log('background')
+
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const {action, sliderState, outline} = message
-    console.log(typeof action)
-    console.log("MESSAGE SENT: ", action, sliderState, outline)
-    
 
-    if (action === 'toggleOutline') {
-      console.log("wth")
-      //slider True
+    if (action === 'toggleSlider') {
       if (sliderState) {
         console.log('State ON')
-        injectStyle()
+        /* injectStyle() */
       } 
       
       //slider False
       else {
-        
+        console.log('State OFF')
       }
 
-    } else if (action === 'saveData'){
-      //chrome.storage.local.set(data);
     }
-  });
+});
 
 
   function injectStyle(){
