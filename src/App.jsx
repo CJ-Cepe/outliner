@@ -18,8 +18,6 @@ function App() {
     })
   }); */
 
-    
-  
   const [sliderState, setSliderState] = useState(false)
   const [outline, setOutline] = useState({
     color: "#ff0000",
@@ -28,16 +26,24 @@ function App() {
     offset: "0",
   });
 
+  //retrieving saved on local
   useEffect(()=>{
-    //retrieve from background if there is a file stored
-      //asign value
-    //sendMessage to content
-      //sliderState
-      //outline
-    /* chrome.storage.local.set({ stylesEnabled }); */
-    //chrome.runtime.sendMessage({ action: 'toggleOutline', outline, sliderState });
-  }, [sliderState])
+    chrome.storage.local.get(['data'], (result) => {
+      const savedData = result.data;
+      if(savedData){
+        setSliderState(savedData.sliderState)
+        setOutline({...savedData.outline})
+      }
+    })
+  }, [])
 
+  //saving on local
+  useEffect(()=>{
+    const tempState = {outline, sliderState};
+    chrome.storage.local.set({ data: tempState});
+
+    /* chrome.runtime.sendMessage({ action: 'toggleOutline', outline, sliderState }); */
+  }, [sliderState, outline])
 
   const handleChange = (key, value) => {
     setOutline({...outline, [key]: value})
