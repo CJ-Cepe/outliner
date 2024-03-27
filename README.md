@@ -1,8 +1,31 @@
-# React + Vite
+- [] outline attribute value
+    - useState to save object containing outline attrib values
+        - set default values
+    - [x] save outline locally
+        - useEffect to retrieve saved data if it exist
+            - setOutline({...data.outline})
+            - if not, already set to default
+        - useEffect to monitor changes and save current outline to local storage
+- [] slider ON/OFF
+    - useState to save button state
+        - set OFF (false) by default
+    - [x] save button state
+        - useEffect to retrieve saved data if it exist
+            - setOutline(data.sliderState)
+            - if not, nothing happens since it is OFF by default
+        - useEffect to monitor changes and save current state to local storage
+- [] add outline style to all
+    - [] inject style 
+        - chrome scripting in the background.js
+        
+- [] add outline style to all
+    - [] What if the page reloads while turned ON
+    
+    - [] all tabs or current tab only?
+    - [] what if turned on then close browser then open again
+        - [] what if crashes and got turned off
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+# Cases

@@ -1,6 +1,5 @@
 export default function Slider ({state, onChange}){
     const handleChange = (event) => {
-        console.log("Slider: " , !state)
         onChange(!state)
     }
 
