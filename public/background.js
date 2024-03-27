@@ -7,38 +7,70 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (action === 'toggleSlider') {
       if (sliderState) {
         console.log('State ON')
+        getTab();
         /* injectStyle() */
+        //add style if it exist
       } 
       
       //slider False
       else {
         console.log('State OFF')
+        removeTab();
+        //remove style if it exist
       }
-
     }
 });
 
+const urls = "*://*/*"
 
-  function injectStyle(){
+  function getTab(){
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs.length > 0) {
         const tabId = tabs[0].id;
-        console.log(tabs[0])
         chrome.scripting.executeScript({
           target: { tabId },
-          func: createStyle,
+          func: injectStyle,
         }).then(() => console.log("injected a function"));
       }
     });
+
+    function injectStyle(){
+      styleElement = document.createElement('link');
+      styleElement.href = chrome.runtime.getURL('outline.css')
+      styleElement.rel = 'stylesheet';
+      styleElement.type = 'text/css'
+      styleElement.dataset.ext = "outlineExtStyle"
+      document.head.appendChild(styleElement);
+    }
+    
   }
 
-function createStyle(){
+  function removeTab(){
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs.length > 0) {
+        const tabId = tabs[0].id;
+        chrome.scripting.executeScript({
+          target: { tabId },
+          func: removeStyle,
+        }).then(() => console.log("injected a function"));
+      }
+    });
 
+    function removeStyle(){
+      const element = document.head.querySelector('link[data-ext = outlineExtStyle]')
+      document.head.removeChild(element)
+    } 
+  }
+ 
+
+
+
+/* function createStyle(){
     const style = " * { outline: 1px solid red } body { background-color: red }"
     const styleElement = document.createElement('style')
     styleElement.textContent = style;
     document.head.appendChild(styleElement)
-  }
+  } */
 
   /*     const response = await fetch(chrome.runtime.getURL('outline.css'));
     const cssText = response.text() */
@@ -60,7 +92,7 @@ function createStyle(){
 } */
 
 
-const urls = "*://*/*"
+
 
 /* 
 //OLD
