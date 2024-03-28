@@ -39,5 +39,4 @@
     - storage -> for saving button and outline attrib 
     - <all_urls> -> to add outline to all pages
 
-
 # Cases

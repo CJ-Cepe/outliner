@@ -1,21 +1,16 @@
-
 //Receive message from popup
 chrome.runtime.onMessage.addListener(handleMessage);
 
 async function handleMessage(message, sender, sendResponse) {
   const {action, sliderState, outline} = message
-
   if (action === 'toggleSlider') {
     const tabs = await getTabs()
-
-    //add style
-    if(sliderState){
+    
+    if(sliderState){ //add style
       tabs.forEach((tab)=>{
         toggleStyle(tab, addStyle)
       })
-    } 
-    //remove style
-    else {
+    } else { //remove style
       tabs.forEach((tab)=>{
         toggleStyle(tab, removeStyle)
       })
@@ -30,22 +25,49 @@ async function getTabs(){
 
 function toggleStyle(tab, func){
   const tabId = tab.id
-  chrome.scripting.executeScript({
-    target: {tabId},
-    func: func,
-  })
+    chrome.scripting.executeScript({
+      target: {tabId},
+      func: func,
+      args : [ getStyle() ],
+    })
 }
 
-function addStyle(){
-  styleElement = document.createElement('link');
-  styleElement.href = chrome.runtime.getURL('outline.css')
-  styleElement.rel = 'stylesheet';
-  styleElement.type = 'text/css'
-  styleElement.dataset.ext = "outlineExtStyle"
-  document.head.appendChild(styleElement);
+function addStyle(style){
+  let element = document.head.querySelector('style[data-ext = outlineExtStyle]')
+
+  if(!element){
+    element = document.createElement('style');
+    element.type = 'text/css'
+    element.dataset.ext = "outlineExtStyle"
+
+    document.head.appendChild(element);
+  }
+  
+  element.textContent = style
 }
 
 function removeStyle(){
-  const element = document.head.querySelector('link[data-ext = outlineExtStyle]')
-  document.head.removeChild(element)
+  const element = document.querySelector('style[data-ext = outlineExtStyle]')
+  if(element){
+    document.head.removeChild(element)
+  }
+}
+
+function getStyle(){
+  const style = `
+      :root {
+        --color: #ff0000;
+        --style: solid;
+        --thickness: 1;
+        --offset: 0;
+      }
+
+      * {
+          outline-color: var(--color);
+          outline-style: var(--style);
+          outline-width: var(--thickness);
+          outline-offset: var(--offset);
+      }
+  `
+  return style
 }
