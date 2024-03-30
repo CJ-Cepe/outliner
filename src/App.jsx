@@ -56,7 +56,7 @@ function App() {
   return (
     <>
       <header>
-        <h1>Element Outliner</h1>
+        <h1>ELEMENT OUTLINER</h1>
         <a href="">User Guide</a>
       </header>
       

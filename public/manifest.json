@@ -11,7 +11,7 @@
     },
     "web_accessible_resources": [
         {
-          "resources": ["outline.css"],
+          "resources": ["/fonts/*.*"],
           "matches": ["<all_urls>"]
         }
     ],
