@@ -1,10 +1,14 @@
+const style = createStyle()
+
 //Receive message from popup
 chrome.runtime.onMessage.addListener(handleMessage);
 
 async function handleMessage(message, sender, sendResponse) {
   const {action, sliderState, outline} = message
+  console.log('message')
   if (action === 'toggleSlider') {
     const tabs = await getTabs()
+    style.setStyle(outline)
     
     if(sliderState){ //add style
       tabs.forEach((tab)=>{
@@ -28,7 +32,7 @@ function toggleStyle(tab, func){
     chrome.scripting.executeScript({
       target: {tabId},
       func: func,
-      args : [ getStyle() ],
+      args : [ style.getStyle()],
     })
 }
 
@@ -53,13 +57,19 @@ function removeStyle(){
   }
 }
 
-function getStyle(){
-  const style = `
+function createStyle(){
+
+  let color;
+  let style;
+  let width;
+  let offset;
+
+  const cssText = `
       :root {
-        --color: #ff0000;
-        --style: solid;
-        --thickness: 1;
-        --offset: 0;
+        --color: ${color};
+        --style: ${style};
+        --thickness: ${width};
+        --offset: ${offset};
       }
 
       * {
@@ -69,5 +79,19 @@ function getStyle(){
           outline-offset: var(--offset);
       }
   `
-  return style
+
+  const getStyle = () => {
+    return cssText
+  }
+
+  const setStyle = (data) => {
+    console.log(data)
+    color && (this.color = color);
+    style && (this.style = style);
+    width && (this.width = thickness);
+    offset && (this.offset = offset);
+  }
+
+  return {getStyle, setStyle}
 }
+

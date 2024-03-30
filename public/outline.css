@@ -1,14 +1,1 @@
 
-:root {
-    --color: #ff0000;
-    --style: solid;
-    --thickness: 1;
-    --offset: 0;
-}
-
-* {
-    outline-color: var(--color);
-    outline-style: var(--style);
-    outline-width: var(--thickness);
-    outline-offset: var(--offset);
-}
