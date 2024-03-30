@@ -56,15 +56,28 @@ function App() {
   return (
     <>
       <header>
-        OUTLINER
+        <h1>Element Outliner</h1>
+        <a href="">User Guide</a>
       </header>
       
       <main>
-        <Field labelName="color" componentType="color" data={outline} onChange={handleChange}/>
-        <Field labelName="style" componentType="style" data={outline} onChange={handleChange}/>
-        <Field labelName="thickness" componentType="thickness" data={outline} onChange={handleChange}/>
-        <Field labelName="offset" componentType="offset" data={outline} onChange={handleChange}/>
-        <Slider state={sliderState} onChange={handleSliderChange}/>
+        <section>
+          <Field labelName="color" componentType="color" data={outline} onChange={handleChange}/>
+          <Field labelName="style" componentType="style" data={outline} onChange={handleChange}/>
+          <Field labelName="thickness" componentType="thickness" data={outline} onChange={handleChange}/>
+          <Field labelName="offset" componentType="offset" data={outline} onChange={handleChange}/>
+        </section>
+        <section>
+          <Field labelName="Selector" componentType="offset" data={outline} onChange={handleChange}/>
+          <div>
+            <p>Specify the element to outline by entering the appropriate CSS selector.</p>
+            <p>Advanced selectors can be used for complex targeting.</p>
+          </div>
+        </section>
+        <section>
+          <Slider state={sliderState} onChange={handleSliderChange}/>
+          <p>Hotkey: Ctrl + Q</p>
+        </section>
       </main>
     </>
   )
