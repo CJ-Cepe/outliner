@@ -14,11 +14,12 @@
   --black1: #242529;
   --white1: #D9D9D9;
   --gray1: #6F6C6D;
+  --gray2: #565656;
   --green1: #65FAAF;
   --fontHeader: 'Gilroy', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   --fontBody: 'Jura', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
-  --gap: 20px;
+  --gap: 10px;
   --radius: 5px;
   --border-width: 1px;
 
@@ -28,19 +29,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
 * {
   /* outline: 1px solid red; */
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 body {
-  width: 300px;
-  padding: 0.5rem;
+  width: 350px;
+  padding: 10px 10px;
 
   line-height: 1;
   font-family: var(--fontBody);
@@ -56,95 +54,143 @@ main {
 
 header {
   display: flex;
-  align-items: end;
+  align-items: start;
+  margin-bottom: var(--gap);
 
   & > h1 {
     font-family: 'Gilroy';
     font-size: 1.1rem;
+    color: var(--green1);
     margin: 0;
     margin-right: auto;
   }
 }
 
 section:nth-child(1){
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
 
-  border: var(--border-width) solid var(--white1);
-  border-radius: var(--radius);
+  & > a {
+    align-self: end;  
+    color: var(--white1)
+  }
+
+  & > fieldset {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-radius: var(--radius);
+    gap: var(--gap);
+    padding: var(--gap);
+
+    & div {
+
+      & label {
+        text-transform: capitalize;
+        font-size: 16px;
+
+        display: flex;
+        align-items: center;
+      }
+
+      & input[type="color"]{
+        border: none;
+        height: 30px;
+      }
+
+      & input[type='number']::-webkit-inner-spin-button {
+        position: absolute;
+        width: 12.5%;
+        height: 100%;
+        top: 0;
+        right: 0;
+      }
+    }
+  }
 }
 
 section:nth-child(2){
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  & fieldset {
+    font-size: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-radius: var(--radius);
+    gap: var(--gap);
+    padding: 5px 10px var(--gap);
 
-  border: var(--border-width) solid var(--white1);
-  border-radius: var(--radius);
+    & div:nth-child(2) {
+      display: flex;
+      align-items: center;
+
+      & label {
+        text-transform: capitalize;
+        font-size: 16px;
+
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    & legend {
+      font-size: 0.75rem;
+    }
+  }
 }
 
 section:nth-child(3){
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px 0;
 }
 
-
-input {
-  width: 50px;
+input, select {
+  width: 70px;
+  height: 25px;
+  color: var(--white1);
+  background-color: var(--black1);
+  border: var(--gray1) 1px solid;
+  border-radius: var(--radius);
+  text-align: center;
 }
 
-/* reference - https://www.w3schools.com/howto/howto_css_switch.asp */
-/* The switch - the box around the slider */
-
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+a {
+  text-decoration: none;
+  color: var(--gray1);
 }
 
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+legend {
+  color: var(--green1);
+  padding: 0 5px;
 }
 
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+/* Button */
+button {
+  border: none;
+  border-radius: var(--radius);
+  background: var(--green1);
 }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+.button_top {
+  font-size: 15px;
+  font-family: var(--fontBody);
+  color: var(--green1);
+  background: var(--gray2);
+
+  display: block;
+  border: 2px solid var(--gray2);
+  border-radius: var(--radius);
+  padding: 5px;
+
+  transform: translateY(-0.2em);
+  transition: transform 0.1s ease;
 }
 
-input:checked + .slider {
-  background-color: #2196F3;
+button:hover .button_top {
+  /* Pull the button upwards when hovered */
+  transform: translateY(-0.33em);
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+button:active .button_top {
+  /* Push the button downwards when pressed */
+  transform: translateY(0);
 }
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-

@@ -9,10 +9,9 @@ export default function Slider ({state, onChange}){
 
     return (
         <>
-          <div className="switch" onClick={handleClick}>
-              <input type="checkbox" checked={state} onChange={handleChange}/>
-              <span className="slider"></span>
-          </div>
+            <button>
+                <span class="button_top"> Toggle Outline </span>
+            </button>
         </>
     )
 }
