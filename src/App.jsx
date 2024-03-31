@@ -62,17 +62,25 @@ function App() {
       
       <main>
         <section>
-          <Field labelName="color" componentType="color" data={outline} onChange={handleChange}/>
-          <Field labelName="style" componentType="style" data={outline} onChange={handleChange}/>
-          <Field labelName="thickness" componentType="thickness" data={outline} onChange={handleChange}/>
-          <Field labelName="offset" componentType="offset" data={outline} onChange={handleChange}/>
+          <a href="">Reset to Default</a>
+          <fieldset>
+            <legend>Outline Attributes</legend>
+            <Field labelName="color" componentType="color" data={outline} onChange={handleChange}/>
+            <Field labelName="width" componentType="thickness" data={outline} onChange={handleChange}/>
+            <Field labelName="style" componentType="style" data={outline} onChange={handleChange}/>
+            <Field labelName="offset" componentType="offset" data={outline} onChange={handleChange}/>
+          </fieldset>
         </section>
         <section>
-          <Field labelName="Selector" componentType="offset" data={outline} onChange={handleChange}/>
-          <div>
-            <p>Specify the element to outline by entering the appropriate CSS selector.</p>
-            <p>Advanced selectors can be used for complex targeting.</p>
-          </div>
+          <fieldset>
+            <legend>Target Elements</legend>
+            <Field labelName="Selector" componentType="offset" data={outline} onChange={handleChange}/>
+            <div>
+              <p>Specify the element to outline by entering the appropriate CSS selector.</p>
+              <br/>
+              <p>Advanced selectors can be used for complex targeting.</p>
+            </div>
+          </fieldset>
         </section>
         <section>
           <Slider state={sliderState} onChange={handleSliderChange}/>
