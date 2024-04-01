@@ -39,4 +39,8 @@
     - storage -> for saving button and outline attrib 
     - <all_urls> -> to add outline to all pages
 
+
+- [] Restructure & redesign extension
+    - [] transform to tailwind
+- [] Button to toggle outline in a page
 # Cases
