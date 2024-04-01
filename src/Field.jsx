@@ -85,7 +85,7 @@ function Field({labelName, componentType, data, onChange}){
       <div>
         <label>
           {input}
-          : {labelName}
+          &nbsp; {labelName}
         </label>
       </div>
     )
