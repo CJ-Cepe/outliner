@@ -1,3 +1,5 @@
+import Text from "./components/Text"
+
   function ColorPicker({attribute, onChange}){
     const handleChange = (event) => {
         onChange("color", event.target.value)
@@ -34,7 +36,7 @@
     )
   }
 
-  function ThicknessPicker({attribute, onChange}){
+  function widthPicket({attribute, onChange}){
     const handleChange = (event) => {
         onChange("thickness", event.target.value)
     }
@@ -46,7 +48,7 @@
     )
   }
   
-  function OffsetPicker({attribute, onChange}){
+  function offsetPicker({attribute, onChange}){
     const handleChange = (event) => {
         onChange("offset", event.target.value)
     }
@@ -65,19 +67,19 @@ function Field({labelName, componentType, data, onChange}){
 
     switch(componentType){
       case "color":
-        input = <ColorPicker attribute={data["color"]} onChange={onChange}/>
+        input = <ColorPicker attribute={data[labelName]} onChange={onChange}/>
         break;
-      case "style":
-        input = <StylePicker attribute={data["style"]} onChange={onChange}/>
+      case "select":
+        input = <StylePicker attribute={data[labelName]} onChange={onChange}/>
         break;
-      case "thickness":
-        input = <ThicknessPicker attribute={data["thickness"]} onChange={onChange}/>
+      case "number": //width + offset
+        input = labelName === "width" ? 
+          <widthPicket attribute={data[labelName]} onChange={onChange}/>
+          : <offsetPicker attribute={data[labelName]} onChange={onChange}/>
         break;
-      case "offset":
-        input = <OffsetPicker attribute={data["offset"]} onChange={onChange}/>
-        break;
-      case "button":
-        input = <Button attribute={data} onChange={onChange}/>
+      case "text":
+        console.log('Type: ' , labelName)
+        input = <Text attribute={data[labelName]} onChange={onChange}/>
         break;
     }
   
