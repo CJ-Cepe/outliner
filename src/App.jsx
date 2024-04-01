@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Field from './Field';
-import Slider from './Slider';
+import Button from './Button';
 
 
 
@@ -18,7 +18,7 @@ function App() {
     })
   }); */
 
-  const [sliderState, setSliderState] = useState(false)
+  const [buttonState, setButtonState] = useState(false)
   const [outline, setOutline] = useState({
     color: "#ff0000",
     style: "solid",
@@ -31,7 +31,7 @@ function App() {
     chrome.storage.local.get(['data'], (result) => {
       const savedData = result.data;
       if(savedData){
-        setSliderState(savedData.sliderState)
+        setButtonState(savedData.sliderState)
         setOutline({...savedData.outline})
       }
     })
@@ -39,18 +39,18 @@ function App() {
 
   //saving on local
   useEffect(()=>{
-    const tempState = {outline, sliderState};
+    const tempState = {outline, sliderState: buttonState};
     chrome.storage.local.set({ data: tempState});
     //send message to background
-    chrome.runtime.sendMessage({ action: 'toggleSlider', outline, sliderState });
-  }, [sliderState, outline])
+    chrome.runtime.sendMessage({ action: 'toggleSlider', outline, sliderState: buttonState });
+  }, [buttonState, outline])
 
   const handleChange = (key, value) => {
     setOutline({...outline, [key]: value})
   }
 
-  const handleSliderChange = (value) => {
-    setSliderState(value)
+  const handleButtonClick = (value) => {
+    setButtonState(!value)
   }
 
   return (
@@ -83,7 +83,7 @@ function App() {
           </fieldset>
         </section>
         <section>
-          <Slider state={sliderState} onChange={handleSliderChange}/>
+          <Button onClick={handleButtonClick}/>
           <p>Hotkey: Ctrl + Q</p>
         </section>
       </main>
