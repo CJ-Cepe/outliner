@@ -5,7 +5,7 @@ export default function Text({attribute, onChange}){
     })
 
     const handleChange = (event) => {
-      onChange("offset", event.target.value)
+      onChange("selector", event.target.value)
     }
 
      //if attribute is empty set to *
