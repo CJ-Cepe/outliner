@@ -1,4 +1,5 @@
 import Text from "./components/Text"
+import Select from "./components/Select" 
 
   function ColorPicker({attribute, onChange}){
     const handleChange = (event) => {
@@ -12,29 +13,7 @@ import Text from "./components/Text"
     )
   }
   
-  function StylePicker({attribute, onChange}){
-    const handleChange = (event) => {
-     onChange("style", event.target.value)
-    }
-  
-    return (
-      <>
-        <select name="" id="" onChange={handleChange} value={attribute}>
-          <option value="auto">auto</option>
-  
-          <option value="solid">solid</option>
-          <option value="dotted">dotted</option>
-          <option value="dashed">dashed</option>
-          <option value="double">double</option>
-  
-          <option value="groove">groove</option>
-          <option value="ridge">ridge</option>
-          <option value="inset">inset</option>
-          <option value="outset">outset</option>
-        </select>
-      </>
-    )
-  }
+
 
   function widthPicket({attribute, onChange}){
     const handleChange = (event) => {
@@ -70,7 +49,7 @@ function Field({labelName, componentType, data, onChange}){
         input = <ColorPicker attribute={data[labelName]} onChange={onChange}/>
         break;
       case "select":
-        input = <StylePicker attribute={data[labelName]} onChange={onChange}/>
+        input = <Select attribute={data[labelName]} onChange={onChange}/>
         break;
       case "number": //width + offset
         input = labelName === "width" ? 
@@ -78,7 +57,6 @@ function Field({labelName, componentType, data, onChange}){
           : <offsetPicker attribute={data[labelName]} onChange={onChange}/>
         break;
       case "text":
-        console.log('Type: ' , labelName)
         input = <Text attribute={data[labelName]} onChange={onChange}/>
         break;
     }
