@@ -100,8 +100,8 @@ section:nth-child(1){
       }
 
       & input[type="color"]{
-        border: none;
-        height: 30px;
+        visibility: hidden;
+        position: absolute;
       }
 
       & input[type='number']::-webkit-inner-spin-button {
@@ -150,7 +150,7 @@ section:nth-child(3){
   padding: 10px 0;
 }
 
-input, select {
+input, select, .input {
   width: 70px;
   height: 25px;
   color: var(--white1);
