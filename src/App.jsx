@@ -22,7 +22,7 @@ function App() {
   const [outline, setOutline] = useState({
     color: "#ff0000",
     style: "solid",
-    thickness: "1",
+    width: "1",
     offset: "0",
     selector: "*"
   });

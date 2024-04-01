@@ -1,44 +1,8 @@
 import Text from "./components/Text"
-import Select from "./components/Select" 
-
-  function ColorPicker({attribute, onChange}){
-    const handleChange = (event) => {
-        onChange("color", event.target.value)
-    }
-  
-    return (
-      <>
-        <input type="color" onChange={handleChange} value={attribute}/>
-      </>
-    )
-  }
-  
+import Select from "./components/Select"
+import Number from "./components/Number"
 
 
-  function widthPicket({attribute, onChange}){
-    const handleChange = (event) => {
-        onChange("thickness", event.target.value)
-    }
-  
-    return (
-      <>
-        <input type="number" onChange={handleChange} value={attribute}/>
-      </>
-    )
-  }
-  
-  function offsetPicker({attribute, onChange}){
-    const handleChange = (event) => {
-        onChange("offset", event.target.value)
-    }
-  
-    return (
-      <>
-        <input type="number" onChange={handleChange} value={attribute}/>
-      </>
-    )
-  }
-  
 
 function Field({labelName, componentType, data, onChange}){
 
@@ -51,10 +15,8 @@ function Field({labelName, componentType, data, onChange}){
       case "select":
         input = <Select attribute={data[labelName]} onChange={onChange}/>
         break;
-      case "number": //width + offset
-        input = labelName === "width" ? 
-          <widthPicket attribute={data[labelName]} onChange={onChange}/>
-          : <offsetPicker attribute={data[labelName]} onChange={onChange}/>
+      case "number":
+        input = <Number label={labelName} attribute={data[labelName]} onChange={onChange}/>
         break;
       case "text":
         input = <Text attribute={data[labelName]} onChange={onChange}/>
