@@ -90,6 +90,13 @@ section:nth-child(1){
 
         display: flex;
         align-items: center;
+
+        & sup {
+          align-self: start;
+          font-size: 14px;
+          color: var(--gray1);
+          text-transform: lowercase;
+        }
       }
 
       & input[type="color"]{

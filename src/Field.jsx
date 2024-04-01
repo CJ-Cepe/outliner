@@ -64,19 +64,19 @@ function Field({labelName, componentType, data, onChange}){
     let input = null
 
     switch(componentType){
-      case "color":  
+      case "color":
         input = <ColorPicker attribute={data["color"]} onChange={onChange}/>
         break;
-      case "style":  
+      case "style":
         input = <StylePicker attribute={data["style"]} onChange={onChange}/>
         break;
-      case "thickness": 
+      case "thickness":
         input = <ThicknessPicker attribute={data["thickness"]} onChange={onChange}/>
         break;
-      case "offset":  
+      case "offset":
         input = <OffsetPicker attribute={data["offset"]} onChange={onChange}/>
         break;
-      case "button":  
+      case "button":
         input = <Button attribute={data} onChange={onChange}/>
         break;
     }
@@ -85,7 +85,7 @@ function Field({labelName, componentType, data, onChange}){
       <div>
         <label>
           {input}
-          &nbsp; {labelName}
+          &nbsp; {labelName} {labelName === 'width' || labelName === 'offset' ? <sup> px </sup> : null}
         </label>
       </div>
     )
