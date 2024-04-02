@@ -9,9 +9,9 @@ export default function Text({attribute, onChange}){
     }
 
      //if attribute is empty set to *
-    if(attribute === ""){
+    /* if(attribute === ""){
       attribute = "*"
-    }
+    } */
 
     return (
       <>

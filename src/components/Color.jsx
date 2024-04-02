@@ -6,7 +6,6 @@ export default function Color({attribute, onChange}){
     const divRef = useRef(null)
 
     useEffect(()=> {
-        console.log("Color=", attribute)
         divRef.current.style.backgroundColor = attribute
     })
 
@@ -22,7 +21,6 @@ export default function Color({attribute, onChange}){
     return (
       <>
         <div ref={divRef} onClick={handleClick} className="input"></div>
-        {console.log("ColorReturn=", attribute)}
         <input ref={colorInputRef} type="color" onChange={handleChange} value={attribute}/>
       </>
     )
