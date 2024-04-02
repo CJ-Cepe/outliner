@@ -41,6 +41,16 @@ function App() {
     setButtonState(!buttonState)
   }
 
+  const resetDefault = () => {
+    setOutline({
+      color: "#ff0000",
+      style: "solid",
+      width: "1",
+      offset: "0",
+      selector: "*"
+    })
+  }
+
   return (
     <>
       <header>
@@ -50,7 +60,7 @@ function App() {
       
       <main>
         <section>
-          <a href="">Reset to Default</a>
+          <a onClick={resetDefault}>Reset to Default</a>
           <fieldset>
             <legend>Outline Attributes</legend>
             <Field labelName="color" componentType="color" data={outline} onChange={handleChange}/>

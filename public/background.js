@@ -28,7 +28,7 @@ async function getTab(){
 }
 
 function createStyle(outline){
-  const {color, style, width, offset} = outline
+  const {color, style, width, offset, selector} = outline
   const cssText = `
       :root {
         --color: ${color};
@@ -37,7 +37,7 @@ function createStyle(outline){
         --offset: ${offset}px;
       }
 
-      * {
+      ${selector} {
           outline-color: var(--color);
           outline-style: var(--style);
           outline-width: var(--thickness);
@@ -81,25 +81,3 @@ function removeStyle(cssText){
     document.head.removeChild(element)
   }
 }
-
-/*
-
-async function handleMessage(message, sender, sendResponse) {
-  const {action, sliderState, outline} = message
-  console.log('message')
-  if (action === 'toggleSlider') {
-    
-    
-    if(sliderState){ //add style
-      tabs.forEach((tab)=>{
-        toggleStyle(tab, addStyle)
-      })
-    } else { //remove style
-      tabs.forEach((tab)=>{
-        toggleStyle(tab, removeStyle)
-      })
-    }
-  }
-}
-
- */
