@@ -19,17 +19,19 @@ function App() {
   useEffect(()=>{
     chrome.storage.local.get(["data"], (result) => {
       const data = result.data;
-      if(savedData){
+      if(data){
         setButtonState(data.buttonState)
         setOutline({...data.outline})
       }
     })
   }, [])
 
-  //saving data on local
+  //saving data on local & sending message to background
   useEffect(()=>{
     chrome.storage.local.set({data: {outline, buttonState: buttonState}})
+    chrome.runtime.sendMessage({action: "toggle", outline, buttonState})
   }, [buttonState, outline])
+
 
   const handleChange = (key, value) => {
     setOutline({...outline, [key]: value})
