@@ -23,6 +23,11 @@
   --radius: 5px;
   --border-width: 1px;
 
+  --xs: 12px;
+  --sm: 14px;
+  --base: 16px;
+  --lg: 18px;
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -30,7 +35,7 @@
 }
 
 * {
-  /* outline: 1px solid red; */
+ /*  outline: 1px solid red; */
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -43,6 +48,7 @@ body {
   line-height: 1;
   font-family: var(--fontBody);
   color: var(--white1);
+  font-size: var(--xs);
   background-color: var(--black1);
 }
 
@@ -59,9 +65,8 @@ header {
 
   & > h1 {
     font-family: 'Gilroy';
-    font-size: 1.1rem;
+    font-size: var(--lg);
     color: var(--green1);
-    margin: 0;
     margin-right: auto;
   }
 }
@@ -71,7 +76,7 @@ section:nth-child(1){
   flex-direction: column;
 
   & > a {
-    align-self: end;  
+    align-self: end;
     color: var(--white1)
   }
 
@@ -86,14 +91,14 @@ section:nth-child(1){
 
       & label {
         text-transform: capitalize;
-        font-size: 16px;
+        font-size: var(--base);
 
         display: flex;
         align-items: center;
 
         & sup {
           align-self: start;
-          font-size: 14px;
+          font-size: var(--sm);
           color: var(--gray1);
           text-transform: lowercase;
         }
@@ -117,28 +122,36 @@ section:nth-child(1){
 
 section:nth-child(2){
   & fieldset {
-    font-size: 10px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
     border-radius: var(--radius);
     gap: var(--gap);
-    padding: 5px 10px var(--gap);
+    padding: var(--gap);
 
     & div:nth-child(2) {
-      display: flex;
-      align-items: center;
-
+  
       & label {
         text-transform: capitalize;
-        font-size: 16px;
+        font-size: var(--base);
 
         display: flex;
         align-items: center;
+  
+        & input {
+          width: 229px;
+          text-align: left;
+          padding: 0 var(--gap);
+        }
       }
     }
 
-    & legend {
-      font-size: 0.75rem;
+    & div:nth-child(3) {
+      font-size: var(--xs);
+
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--gap);
+      color: var(--gray1);
     }
   }
 }
@@ -147,7 +160,11 @@ section:nth-child(3){
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 10px 0;
+  padding: 5px 0;
+
+  & > p {
+    font-size: var(--base);
+  }
 }
 
 input, select, .input {
@@ -168,6 +185,7 @@ a {
 
 legend {
   color: var(--green1);
+  font-size: var(--xs);
   padding: 0 5px;
 }
 
@@ -179,7 +197,7 @@ button {
 }
 
 .button_top {
-  font-size: 15px;
+  font-size: var(--base);
   font-family: var(--fontBody);
   color: var(--green1);
   background: var(--gray2);

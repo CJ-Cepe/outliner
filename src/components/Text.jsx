@@ -15,7 +15,7 @@ export default function Text({attribute, onChange}){
 
     return (
       <>
-        <input type="text" list="elementList" placeholder="enter" onChange={handleChange} value={attribute}/>
+        <input type="text" list="elementList" placeholder="Enter Selector" onChange={handleChange} value={attribute}/>
         <datalist id="elementList">
             {options}
         </datalist>

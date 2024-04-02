@@ -75,7 +75,6 @@ function App() {
             <Field labelName="selector" componentType="text" data={outline} onChange={handleChange}/>
             <div>
               <p>Specify the element to outline by entering the appropriate CSS selector.</p>
-              <br/>
               <p>Advanced selectors can be used for complex targeting.</p>
             </div>
           </fieldset>
