@@ -1,7 +1,7 @@
 function Button ({onClick}){
     
     const handleClick = (event) => {
-        onClick(!state)
+        onClick()
     }
 
     return (

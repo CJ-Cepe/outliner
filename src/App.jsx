@@ -1,22 +1,10 @@
 import { useEffect, useState } from 'react'
 import Field from './Field';
-import Button from './Button';
+import Button from './components/Button';
 
 
 
 function App() {
-  
- /*  chrome.storage.local.get('stylesEnabled', (data) => {
-    checkbox.checked = data.stylesEnabled || false; // Set checkbox state based on storage
-
-    //inside EFFECT
-        chrome.storage.local.get('updatedColorList', (data) => {
-      if(data.updatedColorList){
-        defColorList = [...data.updatedColorList]
-        setColorList(defColorList)
-      }
-    })
-  }); */
 
   const [buttonState, setButtonState] = useState(false)
   const [outline, setOutline] = useState({
@@ -29,29 +17,26 @@ function App() {
 
   //retrieving saved on local
   useEffect(()=>{
-    chrome.storage.local.get(['data'], (result) => {
-      const savedData = result.data;
+    chrome.storage.local.get(["data"], (result) => {
+      const data = result.data;
       if(savedData){
-        setButtonState(savedData.sliderState)
-        setOutline({...savedData.outline})
+        setButtonState(data.buttonState)
+        setOutline({...data.outline})
       }
     })
   }, [])
 
-  //saving on local
+  //saving data on local
   useEffect(()=>{
-    const tempState = {outline, sliderState: buttonState};
-    chrome.storage.local.set({ data: tempState});
-    //send message to background
-    chrome.runtime.sendMessage({ action: 'toggleSlider', outline, sliderState: buttonState });
+    chrome.storage.local.set({data: {outline, buttonState: buttonState}})
   }, [buttonState, outline])
 
   const handleChange = (key, value) => {
     setOutline({...outline, [key]: value})
   }
 
-  const handleButtonClick = (value) => {
-    setButtonState(!value)
+  const handleButtonClick = () => {
+    setButtonState(!buttonState)
   }
 
   return (
