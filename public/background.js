@@ -8,10 +8,12 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
 async function handleMessage(message, sendResponse){
   
   const {action, outline, buttonState, tabId} = message
-  /* const tab = await getTab()*/
+  const tab = await getTab()
+  
   const data = await loadData(action)  
   console.log(`BG-Message [${message.action}]: `,  message)
   console.log(`BG-LoadedData [${message.action}]: `, data)
+  console.log(`BG-tab [${message.action}]: `,  tab)
 
   if(action === 'toggle'){
    /*  const cssText = createStyle(outline)
@@ -26,6 +28,13 @@ async function handleMessage(message, sendResponse){
 
   else if (action === 'save'){
       saveData(undefined, data, action, outline, buttonState)
+      const cssText = createStyle(outline)
+      if(buttonState){
+        toggleStyle(tab, addStyle, cssText)
+      } else {
+        toggleStyle(tab, removeStyle, cssText)
+      }
+
   }
   
   else if (action === 'load'){
@@ -57,13 +66,11 @@ async function loadData(action){
 async function getTab(){
   return new Promise((resolve, reject) => {
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-      console.log('currentWindow: ', tabs)
       if(tabs.length > 0 ){
         resolve(tabs[0]);
       } else {
         // Fallback: Get the active tab in the last focused window
-        chrome.tabs.query({lastFocusedWindow: true }, function(tabs) {
-        console.log('lastFocusedWindow: ', tabs)
+        chrome.tabs.query({ active: true, lastFocusedWindow: true }, function(tabs) {
           if(tabs.length > 0){
             resolve(tabs[0]);
           } else {

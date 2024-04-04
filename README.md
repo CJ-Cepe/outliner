@@ -130,7 +130,7 @@ CONCERNS
         - get current tab id
         - get load data
             - check if current tab's ID is present
-                - if yes, send data to popup (with tabID)
+                - if yes, send data to popup (with tabID)???
                 - if no, send default value to popup
 - Input/Button
     - per change/event send message to background
@@ -147,10 +147,11 @@ CONCERNS
         - save Data with corres tabID
             - if existing: ovewrite
             - if not create data
-- [] Loading
+- [x] Loading
     - every time popup is opened, load data corres to tab ID
     - chrome.storage.local.get(data)
         - then return results.data as data
+- 
 
 
 - [] Getting tab id (current)
