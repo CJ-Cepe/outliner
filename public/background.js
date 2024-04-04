@@ -7,60 +7,75 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
 
 async function handleMessage(message, sendResponse){
   
-  const {action, outline, buttonState, tabId} = message
-  const tab = await getTab()
-  
-  const data = await loadData(action)  
+  const {action, outline, buttonState} = message
+  let {tabId} = message
+  tabId = await getTabId(tabId)
+
+  let data = await loadData() //returns result.data
+  data = checkData(data, tabId)
+
   console.log(`BG-Message [${message.action}]: `,  message)
   console.log(`BG-LoadedData [${message.action}]: `, data)
-  console.log(`BG-tab [${message.action}]: `,  tab)
+  console.log(`BG-tab [${message.action}]: `,  tabId)
 
-  if(action === 'toggle'){
-   /*  const cssText = createStyle(outline)
-    if(buttonState){
-      //adding style
-      console.log('ButtonState: ', buttonState, '->' , tab)
-      toggleStyle(tab, addStyle, cssText)
-    } else {
-      toggleStyle(tab, removeStyle, cssText)
-    } */
-  }
-
-  else if (action === 'save'){
-      saveData(undefined, data, action, outline, buttonState)
+ if (action === 'save'){
+      saveData(data, {...message, tabId})
+      //separate function
       const cssText = createStyle(outline)
       if(buttonState){
-        toggleStyle(tab, addStyle, cssText)
+        toggleStyle(tabId, addStyle, cssText)
       } else {
-        toggleStyle(tab, removeStyle, cssText)
+        toggleStyle(tabId, removeStyle, cssText)
       }
-
   }
   
   else if (action === 'load'){
-     // Send the data back to the popup script
-     console.log(`BG-LoadReply [${message.action}]: `, data["333714304"])
-     sendResponse({data: data["333713486"]});
+     sendResponse({data: {...data[tabId], id: tabId}});
   }
 }
 
-//issue in save?
-function saveData(tabId = "333713486", data, action, outline, buttonState){
+function saveData(data, message){
+  const {outline, buttonState, tabId} = message
+
   data[tabId] = {outline, buttonState}
   chrome.storage.local.set({data})
-  if (chrome.runtime.lastError) {
-    console.log(`Error: ${chrome.runtime.lastError.message}`);
-  } else {
-    console.log(`BG-Saved [${action}]: Saved`);
-  }
 }
 
-async function loadData(action){
+async function loadData(){
   return new Promise ((resolve, reject) => {
     chrome.storage.local.get(['data'], (result) => {
       resolve(result.data)
     })
   })
+}
+
+function checkData(data, id){
+  if(!data){
+    data = { [id]: {
+      outline: {
+      color: "#ff0000",
+      style: "solid",
+      width: "1",
+      offset: "0",
+      selector: "*"
+    }, buttonState: false}
+    }
+  }
+  return data
+}
+
+async function getTabId(tabId){
+  console.log('Start Get tab id: ', tabId)
+  if(!tabId){
+    let tab = await getTab()
+    console.log('Inside Get tab id: ', tab)
+
+    tabId = tab.id
+  }
+
+  console.log('After Get tab id: ', tabId)
+
+  return tabId
 }
 
 async function getTab(){
@@ -103,8 +118,7 @@ function createStyle(outline){
   return cssText
 }
 
-function toggleStyle(tab, func, cssText){
-  const tabId = tab.id
+function toggleStyle(tabId, func, cssText){
     chrome.scripting.executeScript({
       target: {tabId},
       func: func,

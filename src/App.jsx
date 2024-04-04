@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Field from './Field';
 import Button from './components/Button';
 
@@ -16,7 +16,7 @@ function sendMessage(action) {
 }
 
 function App() {
-
+  const tabIdRef = useRef(undefined)
   const [buttonState, setButtonState] = useState(false)
   const [outline, setOutline] = useState({
     color: "#ff0000",
@@ -47,6 +47,8 @@ function App() {
         console.log('Response: ', response.data.outline)
        setOutline({...response.data.outline})
        setButtonState(response.data.buttonState)
+       tabIdRef.current = response.data.id;
+
        console.log("State Updated")
       } catch (error) {
         console.error("Failed to load data:", error);
@@ -61,7 +63,7 @@ function App() {
   useEffect(()=>{
     //chrome.storage.local.set({data: {outline, buttonState: buttonState}})
     console.log("APP - Save --------------")
-    chrome.runtime.sendMessage({action: "save", outline, buttonState: buttonState})
+    chrome.runtime.sendMessage({action: "save", outline, buttonState, tabId: tabIdRef.current})
     /* chrome.runtime.sendMessage({action: "toggle", outline, buttonState}) */
   }, [buttonState, outline])
 
