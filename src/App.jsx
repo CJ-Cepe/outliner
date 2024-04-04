@@ -3,6 +3,17 @@ import Field from './Field';
 import Button from './components/Button';
 
 
+function sendMessage(action) {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage({action: action}, (response) => {
+      if (chrome.runtime.lastError) {
+        reject(chrome.runtime.lastError);
+      } else {
+        resolve(response);
+      }
+    });
+  });
+}
 
 function App() {
 
@@ -16,7 +27,8 @@ function App() {
   });
 
   //retrieving saved on local
-  useEffect(()=>{
+  //Original
+/*   useEffect(()=>{
     chrome.storage.local.get(["data"], (result) => {
       const data = result.data;
       if(data){
@@ -24,12 +36,33 @@ function App() {
         setOutline({...data.outline})
       }
     })
-  }, [])
+  }, []) */
+
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        console.log('preResponse: ')
+        const response = await sendMessage("load");
+        console.log('Response: ', response.data.outline)
+       setOutline({...response.data.outline})
+       setButtonState(response.data.buttonState)
+       console.log("State Updated")
+      } catch (error) {
+        console.error("Failed to load data:", error);
+      }
+    }
+  
+    loadData();
+    console.log("APP - Load --------------");
+  }, []);
 
   //saving data on local & sending message to background
   useEffect(()=>{
-    chrome.storage.local.set({data: {outline, buttonState: buttonState}})
-    chrome.runtime.sendMessage({action: "toggle", outline, buttonState})
+    //chrome.storage.local.set({data: {outline, buttonState: buttonState}})
+    console.log("APP - Save --------------")
+    chrome.runtime.sendMessage({action: "save", outline, buttonState: buttonState})
+    /* chrome.runtime.sendMessage({action: "toggle", outline, buttonState}) */
   }, [buttonState, outline])
 
 
