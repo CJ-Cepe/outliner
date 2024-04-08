@@ -14,7 +14,7 @@
   --black1: #242529;
   --white1: #D9D9D9;
   --gray1: #6F6C6D;
-  --gray2: #565656;
+  --gray2: #464646;
   --green1: #65FAAF;
   --fontHeader: 'Gilroy', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   --fontBody: 'Jura', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -159,12 +159,26 @@ section:nth-child(2){
 section:nth-child(3){
   display: flex;
   align-items: center;
-  justify-content: space-around;
   padding: 5px 0;
+  justify-content: space-between;
 
   & > p {
-    font-size: var(--base);
+    font-size: var(--xs);
+    color: var(--gray1)
   }
+
+  & > a {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+
+    & > span {
+      letter-spacing: 0.5px;
+      pointer-events: none;
+    }
+  }
+
+  /* coffee clear */
 }
 
 input, select, .input {
@@ -181,6 +195,14 @@ a {
   text-decoration: none;
   color: var(--gray1);
   cursor: pointer;
+
+  &:hover {
+    color: var(--white1);
+  }
+
+  &:active {
+    color: var(--green1);
+  }
 }
 
 legend {
@@ -197,7 +219,7 @@ button {
 }
 
 .button_top {
-  font-size: var(--base);
+  font-size: var(--sm);
   font-family: var(--fontBody);
   color: var(--green1);
   background: var(--gray2);
@@ -207,13 +229,13 @@ button {
   border-radius: var(--radius);
   padding: 5px;
 
-  transform: translateY(-0.2em);
+  transform: translateY(-0.15em);
   transition: transform 0.1s ease;
 }
 
 button:hover .button_top {
   /* Pull the button upwards when hovered */
-  transform: translateY(-0.33em);
+  transform: translateY(-0.22em);
 }
 
 button:active .button_top {

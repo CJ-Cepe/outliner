@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Field from './Field';
 import Button from './components/Button';
+import EmojiLink from './components/EmojiLInk';
 
 
 function sendMessage(action) {
@@ -87,6 +88,16 @@ function App() {
     })
   }
 
+  const handleClearStorage = () => {
+    //send message to back to clear
+    chrome.runtime.sendMessage({action: "clear"})
+  }
+
+  const handleBuyCoffee = (event) => {
+    event.target.setAttribute("href", "https://ko-fi.com/huemore_colorpicker")
+    event.target.setAttribute("target", "_blank")
+  }
+
   return (
     <>
       <header>
@@ -118,6 +129,8 @@ function App() {
         <section>
           <Button onClick={handleButtonClick}/>
           <p>Hotkey: Ctrl + Q</p>
+          <EmojiLink emoji="🗑️" content="Clear Storage" onClick={handleClearStorage}/>
+          <EmojiLink emoji="☕" content="Buy Coffee" onClick={handleBuyCoffee}/>
         </section>
       </main>
     </>

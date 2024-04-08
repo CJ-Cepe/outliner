@@ -157,4 +157,5 @@ CONCERNS
     - chrome.storage.local.get(data)
         - then return results.data as data
 - [] handle undefined when switing tab
-
+- [] add button to clear storage & [] add button to buy coffee
+s

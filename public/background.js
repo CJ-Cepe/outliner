@@ -49,7 +49,7 @@ async function loadData(){
   })
 }
 
-//wrong - just check if data is empty not if tabid is present
+ 
 function checkData(data, id){
 
   //handle empty/undefine data for first click
