@@ -117,12 +117,17 @@ CONCERNS
     - check if tab exist
     - if not, remove
     - if yes stay
-    
+
 - Per browser loads, get all tabs ID then get the saved data
     - check if id of each in the saved data is present to the tabs
         - if not, remove that part in the saved data
         - if yes, remain
             - save new data
+    - what listener to use? - windows.onCreated?
+        - what if new window is created when original is still opened?
+        - it will clear the tabs
+    - expiration of data?
+    - add a button to clear local storage
 - Per tab have saved data {outline attributes, button state}
     - save data, including there id as key
         - tabID: {outline, state}
@@ -151,8 +156,5 @@ CONCERNS
     - every time popup is opened, load data corres to tab ID
     - chrome.storage.local.get(data)
         - then return results.data as data
-- 
-
-
-- [] Getting tab id (current)
+- [] handle undefined when switing tab
 

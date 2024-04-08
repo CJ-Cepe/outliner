@@ -6,7 +6,6 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
 });
 
 async function handleMessage(message, sendResponse){
-  
   const {action, outline, buttonState} = message
   let {tabId} = message
   tabId = await getTabId(tabId)
@@ -30,6 +29,7 @@ async function handleMessage(message, sendResponse){
   }
   
   else if (action === 'load'){
+     console.log("BG-Response: ", {data: {...data[tabId], id: tabId}})
      sendResponse({data: {...data[tabId], id: tabId}});
   }
 }
@@ -49,7 +49,10 @@ async function loadData(){
   })
 }
 
+//wrong - just check if data is empty not if tabid is present
 function checkData(data, id){
+
+  //handle empty/undefine data for first click
   if(!data){
     data = { [id]: {
       outline: {
@@ -60,21 +63,27 @@ function checkData(data, id){
       selector: "*"
     }, buttonState: false}
     }
+  } else if (!data[id]){
+    data[id] = {
+      outline: {
+      color: "#ff0000",
+      style: "solid",
+      width: "1",
+      offset: "0",
+      selector: "*"
+    }, buttonState: false}
   }
+
   return data
 }
 
 async function getTabId(tabId){
-  console.log('Start Get tab id: ', tabId)
+  console.log('BG before tabID: ', tabId)
   if(!tabId){
     let tab = await getTab()
-    console.log('Inside Get tab id: ', tab)
-
     tabId = tab.id
   }
-
-  console.log('After Get tab id: ', tabId)
-
+  console.log('BG after tabID: ', tabId)
   return tabId
 }
 
@@ -136,12 +145,10 @@ function addStyle(cssText){
 
     document.head.appendChild(element);
   }
-  
   element.textContent = cssText
 }
 
 function removeStyle(cssText){
-
   const element = document.querySelector('style[data-ext = outlineExtStyle]')
   if(element){
     document.head.removeChild(element)

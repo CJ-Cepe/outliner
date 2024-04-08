@@ -42,27 +42,28 @@ function App() {
   useEffect(() => {
     async function loadData() {
       try {
-        console.log('preResponse: ')
+        console.log('------- APP preResponse: ')
         const response = await sendMessage("load");
-        console.log('Response: ', response.data.outline)
+        console.log('------- APP Response: ', response.data.outline)
+
+        //check if response is good data
+          //if not set default
        setOutline({...response.data.outline})
        setButtonState(response.data.buttonState)
        tabIdRef.current = response.data.id;
-
-       console.log("State Updated")
       } catch (error) {
         console.error("Failed to load data:", error);
       }
     }
   
     loadData();
-    console.log("APP - Load --------------");
+    console.log("------- APP Load");
   }, []);
 
   //saving data on local & sending message to background
   useEffect(()=>{
     //chrome.storage.local.set({data: {outline, buttonState: buttonState}})
-    console.log("APP - Save --------------")
+    console.log("------- APP Save")
     chrome.runtime.sendMessage({action: "save", outline, buttonState, tabId: tabIdRef.current})
     /* chrome.runtime.sendMessage({action: "toggle", outline, buttonState}) */
   }, [buttonState, outline])
