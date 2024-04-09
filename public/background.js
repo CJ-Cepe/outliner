@@ -12,6 +12,7 @@ async function handleMessage(message, sendResponse){
 
   let data = await loadData() //returns result.data
   data = checkData(data, tabId)
+  let response = null;
 
   console.log(`BG-Message [${message.action}]: `,  message)
   console.log(`BG-LoadedData [${message.action}]: `, data)
@@ -26,24 +27,15 @@ async function handleMessage(message, sendResponse){
       } else {
         toggleStyle(tabId, removeStyle, cssText)
       }
+      response = {status: 'saved'}
   }
   
   else if (action === 'load'){
      console.log("BG-Response: ", {data: {...data[tabId], id: tabId}})
-     sendResponse({data: {...data[tabId], id: tabId}});
-  } 
-  
-  else if (action === 'clear'){
-      console.log("clear")
-      chrome.storage.local.remove("data", function() {
-        let error = chrome.runtime.lastError;
-        if (error) {
-            console.error(error);
-        } else {
-            console.log('Local storage cleared');
-        }
-    });
+     response = {data: {...data[tabId], id: tabId}};
   }
+
+  sendResponse(response)
 }
 
 function saveData(data, message){
