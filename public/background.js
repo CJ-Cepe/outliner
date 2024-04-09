@@ -163,3 +163,10 @@ function removeStyle(cssText){
     document.head.removeChild(element)
   }
 }
+
+chrome.commands.onCommand.addListener((command) => {
+  if(command === "toggle-outline"){
+    console.log("Hotkey pressed: ", command)
+  }
+  console.log("yeah!!")
+})

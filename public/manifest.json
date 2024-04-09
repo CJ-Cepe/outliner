@@ -24,6 +24,17 @@
     "permissions": [
         "scripting", "storage", "tabs"
     ],
+    "commands": {
+        "toggle-outline": {
+            "suggested_key": {
+              "default": "Ctrl+Q",
+              "mac": "MacCtrl+Q",
+              "linux": "Ctrl+Q",
+              "chromeos": "Ctrl+Q"
+            },
+            "description": "toggle outline"
+          }
+    },
     "icons": {
         "16": "icon.png",
         "32": "icon.png",
