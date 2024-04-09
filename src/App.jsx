@@ -18,7 +18,6 @@ function sendMessage(action) {
 
 function App() {
   const tabIdRef = useRef(undefined)
-  const [buttonState, setButtonState] = useState(false)
   const [outline, setOutline] = useState({
     color: "#ff0000",
     style: "solid",
@@ -60,18 +59,13 @@ function App() {
     chrome.runtime.sendMessage({action: "save", outline, tabId: tabIdRef.current})
   }, [outline])
 
-  useEffect(()=>{
-    console.log("------- APP Toggle")
-    chrome.runtime.sendMessage({action: "toggle", outline, tabId: tabIdRef.current})
-  }, [buttonState])
-
-
   const handleChange = (key, value) => {
     setOutline({...outline, [key]: value})
   }
 
   const handleButtonClick = () => {
-    setButtonState(!buttonState)
+    /* setButtonState(!buttonState) */
+    chrome.runtime.sendMessage({action: "toggle", outline, tabId: tabIdRef.current})
   }
 
   const resetDefault = () => {
