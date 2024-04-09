@@ -169,6 +169,7 @@ section:nth-child(3){
     margin-left: var(--gap);
   }
 
+  /* buy coffee */
   & > a {
     display: flex;
     flex-direction: column;
@@ -179,8 +180,6 @@ section:nth-child(3){
       pointer-events: none;
     }
   }
-
-  /* coffee clear */
 }
 
 input, select, .input {
@@ -235,12 +234,12 @@ button {
   transition: transform 0.1s ease;
 }
 
+/* Pull the button upwards when hovered */
 button:hover .button_top {
-  /* Pull the button upwards when hovered */
   transform: translateY(-0.22em);
 }
 
+/* Push the button downwards when pressed */
 button:active .button_top {
-  /* Push the button downwards when pressed */
   transform: translateY(0);
 }
