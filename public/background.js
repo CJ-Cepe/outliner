@@ -86,8 +86,12 @@ function checkData(data, id){
 
 async function getTabId(tabId){
   console.log('BG before tabID: ', tabId)
+
   if(!tabId){
     let tab = await getTab()
+    if(!tab) {
+      return null
+    }
     tabId = tab.id
   }
   console.log('BG after tabID: ', tabId)
@@ -98,18 +102,12 @@ async function getTab(){
   return new Promise((resolve, reject) => {
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
       if(tabs.length > 0 ){
+        if(tabs[0].url.startsWith("chrome://")){
+          console.log("Chrome Tab Url: ", tabs[0].url)
+          resolve(null)
+        }
         resolve(tabs[0]);
-      } else {
-        // Fallback: Get the active tab in the last focused window
-        chrome.tabs.query({ active: true, lastFocusedWindow: true }, function(tabs) {
-          if(tabs.length > 0){
-            resolve(tabs[0]);
-          } else {
-            console.error('No active tab found');
-            resolve(null);
-          }
-        });
-      }
+      } 
     })
   });
 }
@@ -135,6 +133,10 @@ function createStyle(outline){
 }
 
 function toggleStyle(tabId, func, cssText){
+    if(!tabId){
+      return null;
+    }
+
     chrome.scripting.executeScript({
       target: {tabId},
       func: func,
