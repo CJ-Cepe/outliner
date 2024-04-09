@@ -31,6 +31,18 @@ async function handleMessage(message, sendResponse){
   else if (action === 'load'){
      console.log("BG-Response: ", {data: {...data[tabId], id: tabId}})
      sendResponse({data: {...data[tabId], id: tabId}});
+  } 
+  
+  else if (action === 'clear'){
+      console.log("clear")
+      chrome.storage.local.remove("data", function() {
+        let error = chrome.runtime.lastError;
+        if (error) {
+            console.error(error);
+        } else {
+            console.log('Local storage cleared');
+        }
+    });
   }
 }
 
@@ -38,12 +50,15 @@ function saveData(data, message){
   const {outline, buttonState, tabId} = message
 
   data[tabId] = {outline, buttonState}
-  chrome.storage.local.set({data})
+  chrome.storage.session.set({data}, () => {
+    console.log("session value set")
+  })
 }
 
 async function loadData(){
   return new Promise ((resolve, reject) => {
-    chrome.storage.local.get(['data'], (result) => {
+    chrome.storage.session.get('data', (result) => {
+      console.log("Load data: ", result)
       resolve(result.data)
     })
   })
@@ -51,7 +66,7 @@ async function loadData(){
 
  
 function checkData(data, id){
-
+  console.log("Check Data: ", data)
   //handle empty/undefine data for first click
   if(!data){
     data = { [id]: {
