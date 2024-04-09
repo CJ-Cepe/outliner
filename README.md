@@ -162,19 +162,31 @@ CONCERNS
     - style
 - [x] refactor chrome.storage.local to chrome.storage.session
         - saved in ram & doesn't persist     
-- [] in popup handle undefine result incase
 - [x] handle async error
     - send response when action is save
 - [x] handle sites that cant be injected
     - catch if tab url starts with "chrome://"
     - return null
-- [] handle toggle button
-- [] adjust logic so when popup is opened, no need for reinjecting style
+- [x] handle toggle button
+    - instead of saving and taking track of button state
+        remove it and instead check wether style in inject or not,
+        then in the app, send toggle message instead of using useEffect
+        to monitor buttonState
 - [x] add and set hotkey
     - declare in manifest
         - set hotkey to listen
     - add eventlistener in the background.js
-- [] set style to important
+- [x] set style to important
+    - add !important, not the recommended approach
+
+
+
+- [] clean console.logs
+- [] handle -> Uncaught (in promise) Error: The extensions gallery cannot be scripted.
+
+- [] adjust logic so when popup is opened, no need for reinjecting style 
+- [] in popup handle undefine result incase
+- [] rename extension style
 
 - cant
     - internal pages of the Chrome browser (like chrome://settings/, chrome://extensions/, etc.) which is not allowed due to security reasons.

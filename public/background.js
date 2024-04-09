@@ -157,7 +157,6 @@ function createStyle(outline){
 // in content scope
 function updateStyle(cssText){
   const element = document.querySelector('style[data-ext = outlineExtStyle]')
-
   if(element){
     element.textContent = cssText
   }

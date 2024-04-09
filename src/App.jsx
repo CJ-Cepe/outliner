@@ -39,7 +39,6 @@ function App() {
               - if not set default
           */
           setOutline({...response.data.outline})
-          /* setButtonState(response.data.buttonState) */
           tabIdRef.current = response.data.id;
         } else {
           console.log(response.status)
@@ -64,7 +63,6 @@ function App() {
   }
 
   const handleButtonClick = () => {
-    /* setButtonState(!buttonState) */
     chrome.runtime.sendMessage({action: "toggle", outline, tabId: tabIdRef.current})
   }
 
