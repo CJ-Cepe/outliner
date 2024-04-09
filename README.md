@@ -158,16 +158,25 @@ CONCERNS
         - then return results.data as data
 - [x] handle undefined when switing tab
     - fix getData function in background.js
-- [x] add button to clear storage & add button to buy coffee
+- [x] add button to buy coffee
     - style
-    - add function
-    - [] in background, add clear function
-        - [] fix potential issues
-        - [] set state in popup too to align in the background
-        - [] refactor chrome.storage.local to chrome.storage.session
-            - saved in ram & doesn't persist
+- [x] refactor chrome.storage.local to chrome.storage.session
+        - saved in ram & doesn't persist     
 - [] in popup handle undefine result incase
-- [] handle async error
-- [] handle sites that cant be injected
+- [x] handle async error
+    - send response when action is save
+- [x] handle sites that cant be injected
+    - catch if tab url starts with "chrome://"
+    - return null
 - [] handle toggle button
+- [] adjust logic so when popup is opened, no need for reinjecting style
+- [x] add and set hotkey
+    - declare in manifest
+        - set hotkey to listen
+    - add eventlistener in the background.js
+- [] set style to important
+
+- cant
+    - internal pages of the Chrome browser (like chrome://settings/, chrome://extensions/, etc.) which is not allowed due to security reasons.
+
 

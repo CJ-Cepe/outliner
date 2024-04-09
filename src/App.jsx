@@ -40,7 +40,7 @@ function App() {
               - if not set default
           */
           setOutline({...response.data.outline})
-          setButtonState(response.data.buttonState)
+          /* setButtonState(response.data.buttonState) */
           tabIdRef.current = response.data.id;
         } else {
           console.log(response.status)
@@ -57,8 +57,13 @@ function App() {
   //saving data on local & sending message to background
   useEffect(()=>{
     console.log("------- APP Save")
-    chrome.runtime.sendMessage({action: "save", outline, buttonState, tabId: tabIdRef.current})
-  }, [buttonState, outline])
+    chrome.runtime.sendMessage({action: "save", outline, tabId: tabIdRef.current})
+  }, [outline])
+
+  useEffect(()=>{
+    console.log("------- APP Toggle")
+    chrome.runtime.sendMessage({action: "toggle", outline, tabId: tabIdRef.current})
+  }, [buttonState])
 
 
   const handleChange = (key, value) => {
