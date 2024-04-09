@@ -164,7 +164,9 @@ section:nth-child(3){
 
   & > p {
     font-size: var(--xs);
-    color: var(--gray1)
+    color: var(--gray1);
+    margin-right: auto;
+    margin-left: var(--gap);
   }
 
   & > a {

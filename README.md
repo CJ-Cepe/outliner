@@ -156,6 +156,18 @@ CONCERNS
     - every time popup is opened, load data corres to tab ID
     - chrome.storage.local.get(data)
         - then return results.data as data
-- [] handle undefined when switing tab
-- [] add button to clear storage & [] add button to buy coffee
-s
+- [x] handle undefined when switing tab
+    - fix getData function in background.js
+- [x] add button to clear storage & add button to buy coffee
+    - style
+    - add function
+    - [] in background, add clear function
+        - [] fix potential issues
+        - [] set state in popup too to align in the background
+        - [] refactor chrome.storage.local to chrome.storage.session
+            - saved in ram & doesn't persist
+- [] in popup handle undefine result incase
+- [] handle async error
+- [] handle sites that cant be injected
+- [] handle toggle button
+

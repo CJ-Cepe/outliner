@@ -1,10 +1,10 @@
 
-function EmojiLink({emoji, content, onClick}){
+function EmojiLink({emoji, content}){
     const [firstWord, secondWord] = content.split(" ")
 
     return (
         <>
-            <a onClick={onClick}> 
+            <a href="https://ko-fi.com/huemore_colorpicker" target="_blank"> 
                 {emoji} {firstWord}
                 <span>{secondWord}</span>
             </a>
