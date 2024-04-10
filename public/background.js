@@ -99,11 +99,11 @@ async function getTab(){
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
       if(tabs.length > 0 ){
         //handle chrome internal pages
-        if(tabs[0].url.startsWith("chrome://")){
+        if(tabs[0].url.startsWith("chrome://") || tabs[0].url.startsWith("https://chromewebstore.google.com/")){
           resolve(null)
         }
         resolve(tabs[0]);
-      } 
+      }
     })
   });
 }

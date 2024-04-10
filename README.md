@@ -182,7 +182,8 @@ CONCERNS
 
 
 - [] clean console.logs
-- [] handle -> Uncaught (in promise) Error: The extensions gallery cannot be scripted.
+- [x] handle -> Uncaught (in promise) Error: The extensions gallery cannot be scripted.
+    - catch if tab url starts with https://chromewebstore.google.com/
 
 - [] adjust logic so when popup is opened, no need for reinjecting style 
 - [] in popup handle undefine result incase
@@ -190,5 +191,5 @@ CONCERNS
 
 - cant
     - internal pages of the Chrome browser (like chrome://settings/, chrome://extensions/, etc.) which is not allowed due to security reasons.
-
+    - The extensions gallery cannot be scripted.
 
