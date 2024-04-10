@@ -34,14 +34,10 @@ function App() {
         console.log('------- APP Response: ', response.data.outline)
 
         if(!response.status){
-          /* Add later!
-              - check if response is good data
-              - if not set default
-          */
-          setOutline({...response.data.outline})
-          tabIdRef.current = response.data.id;
-        } else {
-          console.log(response.status)
+          if(response.data.outline){
+            setOutline({...response.data.outline})
+            tabIdRef.current = response.data.id;
+          }
         }
       } catch (error) {
         console.error("Failed to load data:", error);
