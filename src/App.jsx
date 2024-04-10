@@ -17,6 +17,7 @@ function sendMessage(action) {
 }
 
 function App() {
+  const isFirstRender = useRef(true)
   const tabIdRef = useRef(undefined)
   const [outline, setOutline] = useState({
     color: "#ff0000",
@@ -50,6 +51,11 @@ function App() {
 
   //saving data on local & sending message to background
   useEffect(()=>{
+    if(isFirstRender.current){
+      isFirstRender.current = false;
+      return;
+    }
+
     console.log("------- APP Save")
     chrome.runtime.sendMessage({action: "save", outline, tabId: tabIdRef.current})
   }, [outline])
