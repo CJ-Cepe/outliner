@@ -135,7 +135,10 @@ function setStyle(tabId, func, cssText){
 }
 
 function createStyle(outline){
-  const {color, style, width, offset, selector} = outline
+  let {color, style, width, offset, selector} = outline
+  width = width === "" ? "0" : width;
+  offset = offset === "" ? "0" : offset;
+
   const cssText = `
       :root {
         --color: ${color};

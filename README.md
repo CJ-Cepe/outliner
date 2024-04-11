@@ -183,11 +183,17 @@ CONCERNS
 
 - [] clean console.logs
 - [x] handle -> Uncaught (in promise) Error: The extensions gallery cannot be scripted.
-    - catch if tab url starts with https://chromewebstore.google.com/
+    - catch if tab url starts with "https://chromewebstore.google.com/"
 
-- [] adjust logic so when popup is opened, no need for reinjecting style 
-- [] in popup handle undefine result incase
-- [] rename extension style
+- [x] adjust logic so when popup is opened, no need to update style
+    - prevent  useEffect from running in first render
+        - set a useRef to check whether its first render, if yes, set to false then return
+- [x] in popup handle response.data.outline === undefine result incase
+    - add if
+- [x] rename data-ext style
+    - stay
+- [] input validation
+    - [] input diff/wrong
 
 - cant
     - internal pages of the Chrome browser (like chrome://settings/, chrome://extensions/, etc.) which is not allowed due to security reasons.
