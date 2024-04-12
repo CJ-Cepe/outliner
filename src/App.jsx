@@ -3,7 +3,6 @@ import Field from './Field';
 import Button from './components/Button';
 import EmojiLink from './components/EmojiLInk';
 
-
 function sendMessage(action) {
   return new Promise((resolve, reject) => {
     chrome.runtime.sendMessage({action: action}, (response) => {
@@ -30,9 +29,7 @@ function App() {
   useEffect(() => {
     async function loadData() {
       try {
-        console.log('------- APP preResponse: ')
         const response = await sendMessage("load");
-        console.log('------- APP Response: ', response.data.outline)
 
         if(!response.status){
           if(response.data.outline){
@@ -46,7 +43,6 @@ function App() {
     }
   
     loadData();
-    console.log("------- APP Load");
   }, []);
 
   //saving data on local & sending message to background
@@ -56,7 +52,6 @@ function App() {
       return;
     }
 
-    console.log("------- APP Save")
     chrome.runtime.sendMessage({action: "save", outline, tabId: tabIdRef.current})
   }, [outline])
 
@@ -77,7 +72,6 @@ function App() {
       selector: "*"
     })
   }
-
 
   return (
     <>

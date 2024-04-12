@@ -8,11 +8,6 @@ export default function Text({attribute, onChange}){
       onChange("selector", event.target.value)
     }
 
-     //if attribute is empty set to *
-    /* if(attribute === ""){
-      attribute = "*"
-    } */
-
     return (
       <>
         <input type="text" list="elementList" placeholder="Enter Selector" onChange={handleChange} value={attribute}/>

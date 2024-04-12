@@ -1,14 +1,10 @@
-/* ------------------------------------ */
 /* --------- Message listener --------- */
-/* ------------------------------------ */
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
   handleMessage(message, sendResponse)
   return true;
 });
 
-/* ------------------------------------ */
 /* --------- onMessage callback --------- */
-/* ------------------------------------ */
 async function handleMessage(message, sendResponse){
   const {action, outline} = message
   let {tabId} = message
@@ -19,7 +15,6 @@ async function handleMessage(message, sendResponse){
   data = checkData(data, tabId) //handle wether data is valid
 
   if (action === 'load'){
-    console.log("LOAD: ", {data: {...data[tabId], id: tabId}})
     response = {data: {...data[tabId], id: tabId}};
   } 
   else if (action === 'save'){
@@ -36,9 +31,7 @@ async function handleMessage(message, sendResponse){
 }
 
 
-/* ------------------------------------ */
 /* --------- Checking data --------- */
-/* ------------------------------------ */
 function saveData(data, outline, tabId){
   data[tabId] = {outline}
   chrome.storage.session.set({data})
@@ -75,9 +68,7 @@ function checkData(data, id){
   return data
 }
 
-/* ------------------------------------ */
 /* --------- Checking tab --------- */
-/* ------------------------------------ */
 async function getTabId(tabId){
   //if undefined -> get current tab's id
   if(!tabId){
@@ -108,9 +99,7 @@ async function getTab(){
   });
 }
 
-/* ------------------------------------ */
 /* --------- Toggle Style --------- */
-/* ------------------------------------ */
 function setToggleStyle(action, outline, tabId){
   const cssText = createStyle(outline)
 
@@ -179,9 +168,7 @@ function toggleStyle(cssText){
   }
 }
 
-/* ------------------------------------ */
 /* --------- Hotkey --------- */
-/* ------------------------------------ */
 chrome.commands.onCommand.addListener( async (command) => {
   const tabId = await getTabId(undefined) //get current tab's ID
   let data = await loadData() //get outline - load

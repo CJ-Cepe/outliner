@@ -1,4 +1,3 @@
-
 function EmojiLink({emoji, content}){
     const [firstWord, secondWord] = content.split(" ")
 
