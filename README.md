@@ -1,10 +1,10 @@
 ### PERMISSIONS
-    - tabs -> for querying tabs
-    - scripting -> for appending/removing outline style
-    - storage -> for saving button and outline attrib 
-    - <all_urls> -> to add outline to all pages
+- tabs -> for querying tabs
+- scripting -> for appending/removing outline style
+- storage -> for saving button and outline attrib 
+- <all_urls> -> to add outline to all pages
 
-#### p1
+### p1
 - [x] Restructure & redesign extension
     - [x] transform to tailwind -> maybe next time
     - [x] replace font sizes
@@ -64,7 +64,7 @@
 - [x] handle resetting of outline style and selector
 - [x] handle hot key
 
-#### p2
+### p2
 - [x] Saving
     - App
         - useEffect [outline, button]
@@ -117,32 +117,32 @@
     - selector
     - dropdown
     - color
-- [] clean console.logs
+- [x] clean console.logs
 
 ### Limitations
-    - internal pages of the Chrome browser (like chrome://settings/, chrome://extensions/, etc.) which is not allowed due to security reasons.
-    - The extensions gallery cannot be scripted.
+- internal pages of the Chrome browser (like chrome://settings/, chrome://extensions/, etc.) which is not allowed due to security reasons.
+- The extensions gallery cannot be scripted.
 
 ### Other Concerns
-    - [X] decide if all tabs or current tab only?
-        - current tab only
-             - the outlining would not be active until they click the button in that tab.
-    - [x] when turned ON and tab is loaded
-        - decided to apply outline to current tab only
-    - [x] What if the page reloads while turned ON
-        - toggle style, no need to rely on button truth or false
-    - [x] each tab, diff settings/outline style
-        - Store tabId
-    - [x] what if turned on then close browser then open again
-        - resets stored session data
-        - to prevent storing unnecessary file
-    - [x] remove stored data for non-existing tabID
-        - remove style on Close - tabs.onRemoved, window.onRemoved?
-            - but what if the browser closed differently? 
-                - such as crashes
-        - clear storage when opened?
-        - get style for corres ID?
-        - just save using session
+- [X] decide if all tabs or current tab only?
+    - current tab only
+         - the outlining would not be active until they click the button in that tab.
+- [x] when turned ON and tab is loaded
+    - decided to apply outline to current tab only
+- [x] What if the page reloads while turned ON
+    - toggle style, no need to rely on button truth or false
+- [x] each tab, diff settings/outline style
+    - Store tabId
+- [x] what if turned on then close browser then open again
+    - resets stored session data
+    - to prevent storing unnecessary file
+- [x] remove stored data for non-existing tabID
+    - remove style on Close - tabs.onRemoved, window.onRemoved?
+        - but what if the browser closed differently? 
+            - such as crashes
+    - clear storage when opened?
+    - get style for corres ID?
+    - just save using session
 
 ### Initial
 - Per tab, save data state
