@@ -77,7 +77,7 @@ function App() {
     <>
       <header>
         <h1>ELEMENT OUTLINER</h1>
-        <a href="">User Guide</a>
+        <a>User Guide</a>
       </header>
       
       <main>
