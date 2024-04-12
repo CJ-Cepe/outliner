@@ -1,16 +1,15 @@
-
-- PERMISSIONS
+### PERMISSIONS
     - tabs -> for querying tabs
     - scripting -> for appending/removing outline style
     - storage -> for saving button and outline attrib 
     - <all_urls> -> to add outline to all pages
 
-
+#### p1
 - [x] Restructure & redesign extension
     - [x] transform to tailwind -> maybe next time
     - [x] replace font sizes
 - [x] Hide color input and replace div as placeholder
-    - this is to make the inputs look consistent
+    - this is to make the inputs consistent
     - hide color input
     - when div is clicked, trigger click color input aswell
     - handle onChange, and set colorInput Event value as div's background color
@@ -26,8 +25,8 @@
         - useEffect to retrieve saved data if it exist
             - setOutline({...data.outline})
             - if not, nothing happens already set to default
-    - [] Save status for each tab?
-- [] Toggle/Click button -> toggle outline in a page
+    - [x] Save status for each tab
+- [x] Toggle/Click button -> toggle outline in a page
     - useState to save button state
         - set OFF (false) by default
     - [x] save button state
@@ -53,46 +52,99 @@
             - inject style
         - when button stateis false
             - remove style
-- [] Default for outline and button state
+- [x] Default for outline and button state
     - set a default value for outline state as obj & button state
-    - [] what if empty string?
-    - [] what if negative number?
+    - [x] what if empty string?
+    - [x] what if negative number?
         - selector
-        - outline
+        - offset
         - width
 - [x] handle selector input
     - set inject css selector to inputed value
 - [x] handle resetting of outline style and selector
-- [] handle hot key
+- [x] handle hot key
 
+#### p2
+- [x] Saving
+    - App
+        - useEffect [outline, button]
+        - sendMessage to background with data
+            - {"save", outline, buttoneState, tabID}
+    - Background
+        - save Data with corres tabID
+            - if existing: ovewrite
+            - if not create data
+- [x] Loading
+    - every time popup is opened, load data corres to tab ID
+    - chrome.storage.local.get(data)
+        - then return results.data as data
+- [x] handle undefined when switing tab
+    - fix getData function in background.js
+- [x] add button to buy coffee
+    - style
+- [x] refactor chrome.storage.local to chrome.storage.session
+    - saved in ram & doesn't persist
+- [x] handle async error
+    - return true & send response per action
+- [x] handle toggle button
+    - instead of saving and taking track of button state
+        remove it and instead check wether style in inject or not,
+        then in the app, send toggle message instead of using useEffect
+        to monitor buttonState
+- [x] add and set hotkey
+    - declare in manifest
+        - set hotkey to listen
+    - add eventlistener in the background.js
+- [x] set style to important
+    - stay as is
+    - don't add !important, not the recommended approach
+- [x] handle sites that cant be injected
+    - catch if tab url starts with
+        - [x] "chrome://"
+            - internal pages of the Chrome browser
+        - [x] "https://chromewebstore.google.com/"
+            - extensions gallery cannot be scripted
+    - return null
+- [x] adjust logic so when popup is opened, no need to update style
+    - prevent  useEffect from running in first render
+        - set a useRef to check whether its first render, if yes, set to false then return
+- [x] in popup handle response.data.outline === undefine result incase
+    - add if
+- [x] rename data-ext style
+    - stay
+- [x] input validation
+    - [x] width & offset - input number
+    - selector
+    - dropdown
+    - color
+- [] clean console.logs
 
-???
-- [] check if style element exist
-- [] resets when popup is opened
-- [] state per tab?
-    - [] save data
-        - tabID: {outline, button State}
+### Limitations
+    - internal pages of the Chrome browser (like chrome://settings/, chrome://extensions/, etc.) which is not allowed due to security reasons.
+    - The extensions gallery cannot be scripted.
 
-CONCERNS
+### Other Concerns
     - [X] decide if all tabs or current tab only?
         - current tab only
              - the outlining would not be active until they click the button in that tab.
     - [x] when turned ON and tab is loaded
         - decided to apply outline to current tab only
-    - [] What if the page reloads while turned ON
-        - [] toggle style? no need to rely on button truth or false
-            - but useEffect is used to monitor button changes
-    - [] each tab, diff settings/outline style
-        - [] Store tabId
-    - [] what if turned on then close browser then open again
-    - [] remove stored data for non-existing tabID
-        - remove style on Close - tabs.onRemoved, window.onRemoved
+    - [x] What if the page reloads while turned ON
+        - toggle style, no need to rely on button truth or false
+    - [x] each tab, diff settings/outline style
+        - Store tabId
+    - [x] what if turned on then close browser then open again
+        - resets stored session data
+        - to prevent storing unnecessary file
+    - [x] remove stored data for non-existing tabID
+        - remove style on Close - tabs.onRemoved, window.onRemoved?
             - but what if the browser closed differently? 
-                - [] such as crashes
-        - [] clear storage when opened
-        - [] get style for corres ID
+                - such as crashes
+        - clear storage when opened?
+        - get style for corres ID?
+        - just save using session
 
-???
+### Initial
 - Per tab, save data state
     - initialize
         -  
@@ -117,7 +169,6 @@ CONCERNS
     - check if tab exist
     - if not, remove
     - if yes stay
-
 - Per browser loads, get all tabs ID then get the saved data
     - check if id of each in the saved data is present to the tabs
         - if not, remove that part in the saved data
@@ -141,61 +192,3 @@ CONCERNS
     - per change/event send message to background
         - Save - save changes to data
         - Apply - apply changes to css
-
-
-- [x] Saving
-    - App
-        - useEffect [outline, button]
-        - sendMessage to background with data
-            - {"save", outline, buttoneState, tabID}
-    - Background
-        - save Data with corres tabID
-            - if existing: ovewrite
-            - if not create data
-- [x] Loading
-    - every time popup is opened, load data corres to tab ID
-    - chrome.storage.local.get(data)
-        - then return results.data as data
-- [x] handle undefined when switing tab
-    - fix getData function in background.js
-- [x] add button to buy coffee
-    - style
-- [x] refactor chrome.storage.local to chrome.storage.session
-        - saved in ram & doesn't persist     
-- [x] handle async error
-    - send response when action is save
-- [x] handle sites that cant be injected
-    - catch if tab url starts with "chrome://"
-    - return null
-- [x] handle toggle button
-    - instead of saving and taking track of button state
-        remove it and instead check wether style in inject or not,
-        then in the app, send toggle message instead of using useEffect
-        to monitor buttonState
-- [x] add and set hotkey
-    - declare in manifest
-        - set hotkey to listen
-    - add eventlistener in the background.js
-- [x] set style to important
-    - add !important, not the recommended approach
-
-
-
-- [] clean console.logs
-- [x] handle -> Uncaught (in promise) Error: The extensions gallery cannot be scripted.
-    - catch if tab url starts with "https://chromewebstore.google.com/"
-
-- [x] adjust logic so when popup is opened, no need to update style
-    - prevent  useEffect from running in first render
-        - set a useRef to check whether its first render, if yes, set to false then return
-- [x] in popup handle response.data.outline === undefine result incase
-    - add if
-- [x] rename data-ext style
-    - stay
-- [] input validation
-    - [] input diff/wrong
-
-- cant
-    - internal pages of the Chrome browser (like chrome://settings/, chrome://extensions/, etc.) which is not allowed due to security reasons.
-    - The extensions gallery cannot be scripted.
-
