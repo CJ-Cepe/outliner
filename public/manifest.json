@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Outliner",
+    "name": "Element Outliner",
     "version": "1.0",
-    "description": "A simple html element outliner",
+    "description": "Toggle Elements' Outline",
     "author":{
         "email": "cj.ceps@gmail.com"
     },
@@ -32,7 +32,7 @@
               "linux": "Ctrl+Q",
               "chromeos": "Ctrl+Q"
             },
-            "description": "toggle outline"
+            "description": "Toggle Outline"
           }
     },
     "icons": {
