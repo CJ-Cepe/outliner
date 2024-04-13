@@ -84,7 +84,7 @@ function App() {
         <section>
           <a onClick={resetDefault}>Reset to Default</a>
           <fieldset>
-            <legend>Outline Attributes</legend>
+            <legend>Outline Properties</legend>
             <Field labelName="color" componentType="color" data={outline} onChange={handleChange}/>
             <Field labelName="width" componentType="number" data={outline} onChange={handleChange}/>
             <Field labelName="style" componentType="select" data={outline} onChange={handleChange}/>
