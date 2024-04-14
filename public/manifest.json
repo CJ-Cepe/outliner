@@ -18,11 +18,8 @@
     "background": {
         "service_worker": "background.js"
     }, 
-    "host_permissions": [
-        "<all_urls>"
-      ],
     "permissions": [
-        "scripting", "storage", "tabs"
+      "activeTab", "scripting", "storage"
     ],
     "commands": {
         "toggle-outline": {
