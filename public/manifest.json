@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Element Outliner",
     "version": "1.0",
-    "description": "Toggle Elements' Outline",
+    "description": "Adds Outlines to Elements",
     "author":{
         "email": "cj.ceps@gmail.com"
     },
