@@ -3,7 +3,7 @@ function EmojiLink({emoji, content}){
 
     return (
         <>
-            <a href="https://ko-fi.com/huemore_colorpicker" target="_blank"> 
+            <a href="https://ko-fi.com/ceps#" target="_blank"> 
                 {emoji} {firstWord}
                 <span>{secondWord}</span>
             </a>
