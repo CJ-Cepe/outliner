@@ -84,13 +84,12 @@ async function getTabId(tabId){
   return tabId
 }
 
+ // query current active tab
 async function getTab(){
   return new Promise((resolve, reject) => {
-    // query current active tab
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
       if(tabs.length > 0 ){
-        //handle chrome internal pages
-        if(tabs[0].url.startsWith("chrome://") || tabs[0].url.startsWith("https://chromewebstore.google.com/") || tabs[0].url.startsWith("https://chrome.google.com/webstore/")){
+        if(checkUrl(tabs[0].url)){
           resolve(null)
         }
         resolve(tabs[0]);
@@ -98,6 +97,19 @@ async function getTab(){
     })
   });
 }
+
+function checkUrl(url){
+  const urls = [
+    "chrome://",
+    "https://chromewebstore.google.com/",
+    "https://chrome.google.com/webstore/",
+    "edge://",
+    "https://microsoftedge.microsoft.com/",
+  ]
+
+  return urls.some(element => url.startsWith(element));
+}
+
 
 /* --------- Toggle Style --------- */
 function setToggleStyle(action, outline, tabId){
